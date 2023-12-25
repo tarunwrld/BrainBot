@@ -210,7 +210,7 @@ def main():
                 if st.button:
                     template = """Question: {question}
 
-                            Answer: Lets think step by step I'm a smart assistant My work is to provide efficient answer My name is BrainBot developed by Mr. Tarun"""
+                            Answer: I'm a smart assistant My work is to provide efficient answer My name is BrainBot developed by Mr. Tarun"""
 
                     prompt = PromptTemplate(template=template, input_variables=["question"])
                     llm = HuggingFaceHub(
