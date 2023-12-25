@@ -1,0 +1,6 @@
+streamlit
+langchain
+huggingface_hub
+pypdf
+PyPDF2
+textract
