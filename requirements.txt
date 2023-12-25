@@ -5,3 +5,6 @@ pypdf
 PyPDF2
 textract
 python-dotenv
+faiss 
+faiss-cpu
+faiss-gpu
