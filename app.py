@@ -331,7 +331,7 @@ def main():
             page_bg_img = '''
                 <style>
                 [data-testid = "stAppViewContainer"] {
-                background-image: url("https://cdn.dribbble.com/users/2560227/screenshots/5288424/media/bb5367c566d7af6bd2dac446f3baebd6.png?resize=1000x750&vertical=center");
+                background-image: url("https://blog.thomasnet.com/hs-fs/hubfs/shutterstock_774749455.jpg?width=900&name=shutterstock_774749455.jpg");
                 background-size: cover;
                 }
                 [data-testid = "stHeader"] {
