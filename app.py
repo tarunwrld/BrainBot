@@ -10,7 +10,7 @@ import os
 import requests
 import streamlit as st
 
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HuggingFaceToken1"]
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACETOKEN1"]
 API_TOKEN = os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACETOKEN2"]
 
 API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-v0.1"
