@@ -1,8 +1,8 @@
 streamlit
 langchain
 huggingface_hub
+faiss-cpu
 pypdf
 PyPDF2
 textract
 python-dotenv 
-faiss-cpu
