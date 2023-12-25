@@ -205,9 +205,9 @@ def main():
             st.title("Chat with BrainBot AI")
             st.markdown(""":red[**The BrainBot Ai is in early stages, can generete short inaccurate responses**]""")
             question = st.text_input("Write Something Here: ")
-            if st.button:
+            st.button("Ask BrainBot")
             if question:
-                st.button("Ask BrainBot")
+                if st.button:
                     template = """Question: {question}
 
                             Answer: Lets think step by step I'm a smart assistant My work is to provide efficient answer My name is BrainBot developed by Mr. Tarun"""
