@@ -6,7 +6,6 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain.llms import HuggingFaceHub
-from sentence_transformers import SentenceTransformer,util
 import os
 from dotenv import load_dotenv
 import requests
