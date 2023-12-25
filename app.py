@@ -200,8 +200,7 @@ def main():
 
             st.markdown(page_bg_img, unsafe_allow_html=True)
 
-            # repo_id = "mistralai/Mistral-7B-v0.1" 
-            repo_id = "skt/ko-gpt-trinity-1.2B-v0.5"
+            repo_id = "mistralai/Mistral-7B-v0.1" 
             st.title("Chat with BrainBot AI")
             st.markdown(""":red[**The BrainBot Ai is in early stages, can generete short inaccurate responses**]""")
             question = st.text_input("Write Something Here: ")
