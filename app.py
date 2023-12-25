@@ -7,17 +7,11 @@ from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain.llms import HuggingFaceHub
 import os
-from dotenv import load_dotenv
 import requests
 import streamlit as st
 
-load_dotenv()
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = os.getenv("HuggingFaceToken1")
-# C = os.getenv("HUGGINGFACETOKEN1")
-# API_TOKEN = os.getenv("HUGGINGFACETOKEN2")
-# print(API_TOKEN)
-# load_dotenv()
-API_TOKEN = os.environ["HUGGINGFACEHUB_API_TOKEN"] = os.getenv("HUGGINGFACETOKEN2")
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets("HuggingFaceToken1")
+API_TOKEN = os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets("HUGGINGFACETOKEN2")
 
 API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-v0.1"
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
