@@ -4,3 +4,4 @@ huggingface_hub
 pypdf
 PyPDF2
 textract
+python-dotenv
