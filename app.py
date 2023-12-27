@@ -103,7 +103,7 @@ def main():
             page_bg_img = '''
                 <style>
                 [data-testid = "stAppViewContainer"] {
-                # background-image: url("https://cdn.dribbble.com/users/1766465/screenshots/14502878/media/ba92064dd5bac7f0eadf35e515df14b5.png?resize=1000x750&vertical=center");
+                # background-image: url("https://cdn.dribbble.com/userupload/10866282/file/original-38717156570428074efc23bd1712f6c9.jpg?resize=1200x750");
                 background-size: cover;
                 }
                 [data-testid = "stHeader"] {
