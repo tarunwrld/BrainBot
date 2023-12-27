@@ -174,7 +174,7 @@ def main():
             page_bg_img = '''
                 <style>
                 [data-testid = "stAppViewContainer"] {
-                background-image: url("https://cdn.dribbble.com/userupload/9624904/file/still-cb16e7cce808be23a2bfa8661007485b.png?resize=450x338&vertical=center");
+                background-image: url("https://cdn.dribbble.com/userupload/10866282/file/original-38717156570428074efc23bd1712f6c9.jpg?resize=1200x750");
                 background-size: cover;
                 }
                 
