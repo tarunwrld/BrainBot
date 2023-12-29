@@ -201,7 +201,7 @@ def main():
             st.markdown(page_bg_img, unsafe_allow_html=True)
 
             # repo_id = "mistralai/Mistral-7B-v0.1" 
-            repo_id = "openchat/openchat_3.5"
+            repo_id = "openchat/openchat-3.5-1210"
             st.title("Chat with BrainBot AI")
             st.markdown(""":red[**The BrainBot Ai is in early stages, can generete short inaccurate responses**]""")
             question = st.text_input("Write Something Here: ")
