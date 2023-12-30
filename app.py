@@ -7,6 +7,9 @@ from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain.llms import HuggingFaceHub
 import os
+import io
+from PIL import Image
+import time
 import requests
 import streamlit as st
 
@@ -14,6 +17,7 @@ os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACETOKEN1"]
 API_TOKEN = os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACETOKEN2"]
 
 API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-v0.1"
+API_URL2 = "https://api-inference.huggingface.co/models/segmind/SSD-1B"
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
 def query(payload):
@@ -24,7 +28,10 @@ def query(payload):
 st.set_page_config(
     page_title="BrainBot",
     page_icon=":robot_face:",
-    layout="wide"
+    layout="wide",
+         menu_items={
+        'About': "# Under Construction"
+    }
     )
 
 def main():
@@ -40,7 +47,7 @@ def main():
                 """
         st.markdown(hide_st_style, unsafe_allow_html=True)
         
-        page = st.sidebar.radio("", ("Home", "Pdf Chat", "ChatBot","Privacy Policy", "Text-Bomber", "Text-to-Voice", "My Projects"))
+        page = st.sidebar.radio("", ("Home", "Pdf Chat", "ChatBot","Text-to-Image","Privacy Policy", "Text-Bomber", "Text-to-Voice", "My Projects"))
 
     user = None  # Define the user variable outside the if block
 
@@ -49,7 +56,6 @@ def main():
             page_bg_img = '''
                 <style>
                     [data-testid = "stAppViewContainer"] {
-                    # background-image: url("https://cdn.dribbble.com/userupload/9493524/file/original-191d685dc9e50c38cbb4f7363a7c714e.jpg?resize=1200x713");
                     background-image: url("https://cdn.dribbble.com/userupload/4011847/file/original-791dcead9571116617ad7b449547e6fe.png?resize=1200x1200");
                     background-size: cover;
                     }
@@ -94,6 +100,10 @@ def main():
                 st.markdown("![Alt Text](https://media1.giphy.com/media/eljCVpMrhepUSgZaVP/giphy.gif)")
                 # st.video("https://cdn.dribbble.com/users/32512/screenshots/16146992/media/d3a1d9da27f3434eef4349725050da2b.mp4",format="video/mp4", start_time=0)
                 st.write("BrainBot Neural Network")
+                st.toast('Welcome User!!')
+                time.sleep(2)
+                st.toast('Start Exploring From Sidebar')
+                time.sleep(5)
 
         with st.container():
             st.divider()
@@ -224,6 +234,81 @@ def main():
                 else:
                     st.warning("Oops! Something went wrong. Please try again.")
 
+    elif page == "Text-to-Image":
+        with st.container():
+            page_bg_img = '''
+                <style>
+                [data-testid = "stAppViewContainer"] {
+                background-image: url("https://cdn.wallpapersafari.com/66/44/2XSkpV.jpg");
+                background-size: cover;
+                }
+                [data-testid = "stHeader"] {
+                background-color : rgba(0,0,0,0);
+                }
+                [data-testid = "stToolbar"] {
+                right: 2rem;
+                }
+                
+                [data-testid = "stSidebar"] {
+                background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/9192cab2-667e-4641-920d-5ed6cd554c15/d8fzxcq-4399d43f-3685-43a1-bc74-0611ef2f055c.png/v1/fill/w_1024,h_1280,q_80,strp/purple___blue_gradient___custom_box_background_by_rnewls_d8fzxcq-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiJcL2ZcLzkxOTJjYWIyLTY2N2UtNDY0MS05MjBkLTVlZDZjZDU1NGMxNVwvZDhmenhjcS00Mzk5ZDQzZi0zNjg1LTQzYTEtYmM3NC0wNjExZWYyZjA1NWMucG5nIiwid2lkdGgiOiI8PTEwMjQifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.GClmvnk9czR3dcYxAAV56txGcrqwWVg-DEVwJmP2AF0");
+                background-size: cover;
+                }
+                </style>
+                '''
+            st.markdown(page_bg_img, unsafe_allow_html=True)
+
+            left_column, right_column = st.columns(2)
+            with left_column:
+
+                st.header("Text To Image Generator 👻")
+                st.title("Generate infinite versions of your creativity with BrainBot.")
+
+                inpu1 = st.text_input("Write Your Creation🖋️")
+                o = st.button("Create")
+                if o:
+                    st.toast('Processing!!', icon='📈')
+
+                st.write(" ")
+                st.divider()
+                st.write("Try writing Cute Cat🐈")
+
+                st.write("""
+                        
+                    This is an AI Image Generator. It creates an image from scratch from a text description.
+
+                    Yes, this is the one you've been waiting for. This text to image generator uses AI to understand your words and convert them to a unique image each time. Like magic.
+
+                    This can be used to generate AI art, or for general silliness.
+
+                    Don't expect the quality to be photorealistic, however. You would need a really really big AI to do that, and have you priced those lately?
+
+                    If you can't think of something, try "Balloon in the shape of X" where X is something you wouldn't find in balloon form.""")
+
+            with right_column:
+                st.title("Your Creation Output🙌")
+                st.write("It can take some while....")
+
+                if inpu1:
+                    progress_text = "Operation in progress. Please wait.."
+                    my_bar = st.progress(0, text=progress_text)
+
+                    for percent_complete in range(100):
+                        time.sleep(0.1)
+                        my_bar.progress(percent_complete + 1, text=progress_text)
+                    time.sleep(1)
+                    # my_bar.empty()
+                    def query(payload):
+                        response = requests.post(API_URL2, headers=headers, json=payload)
+                        return response.content
+                    image_bytes = query({
+                        "inputs": inpu1,
+                    })
+                    image = Image.open(io.BytesIO(image_bytes))
+                    new_image = image.resize((600, 500))
+                    st.image(new_image, caption = inpu1)
+                    my_bar.empty()
+                
+            st.divider()
 
     elif page == "Privacy Policy":
         with st.container():
@@ -354,4 +439,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
