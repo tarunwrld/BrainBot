@@ -5,4 +5,3 @@ faiss-cpu
 pypdf
 PyPDF2
 textract
-python-dotenv 
