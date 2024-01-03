@@ -179,8 +179,7 @@ def main():
                         with st.chat_message("assistant"):
                             st.write(generated_text)
             except:
-                st.error("Error, This error can be genrated from server side.// Recommended Action: Reload the App //")
-                st.stop()
+                st.error("Error, This error can be genrated from server side.// Recommended Action: Rerun the App //")
 
 
     elif page == "ChatBot":
@@ -240,8 +239,7 @@ def main():
                         st.warning("Oops! Something went wrong. Please try again.")
 
             except:
-                st.error("Error, This error can be genrated from server side.// Recommended Action: Reload the App //")
-                st.stop()
+                st.error("Error, This error can be genrated from server side.// Recommended Action: Rerun the App //")
 
     elif page == "Text-to-Image":
         with st.container():
@@ -318,8 +316,7 @@ def main():
                         st.image(new_image, caption = inpu1)
                         my_bar.empty()
                 except:
-                    st.error("Error, This error can be genrated from server side.// Recommended Action: Reload the App //")
-                    st.stop()
+                    st.error("Error, This error can be genrated from server side.// Recommended Action: Rerun the App //")
                 
             st.divider()
 
