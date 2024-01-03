@@ -265,37 +265,37 @@ def main():
             st.markdown(page_bg_img, unsafe_allow_html=True)
 
             left_column, right_column = st.columns(2)
-            with left_column:
+            try:
+                with left_column:
 
-                st.header("Text To Image Generator 👻")
-                st.title("Generate infinite versions of your creativity with BrainBot.")
+                    st.header("Text To Image Generator 👻")
+                    st.title("Generate infinite versions of your creativity with BrainBot.")
 
-                inpu1 = st.text_input("Write Your Creation🖋️")
-                o = st.button("Create")
-                if o:
-                    st.toast('Processing!!', icon='📈')
+                    inpu1 = st.text_input("Write Your Creation🖋️")
+                    o = st.button("Create")
+                    if o:
+                        st.toast('Processing!!', icon='📈')
 
-                st.write(" ")
-                st.divider()
-                st.write("Try writing Cute Cat🐈")
+                    st.write(" ")
+                    st.divider()
+                    st.write("Try writing Cute Cat🐈")
 
-                st.write("""
-                        
-                    This is an AI Image Generator. It creates an image from scratch from a text description.
+                    st.write("""
+                            
+                        This is an AI Image Generator. It creates an image from scratch from a text description.
 
-                    Yes, this is the one you've been waiting for. This text to image generator uses AI to understand your words and convert them to a unique image each time. Like magic.
+                        Yes, this is the one you've been waiting for. This text to image generator uses AI to understand your words and convert them to a unique image each time. Like magic.
 
-                    This can be used to generate AI art, or for general silliness.
+                        This can be used to generate AI art, or for general silliness.
 
-                    Don't expect the quality to be photorealistic, however. You would need a really really big AI to do that, and have you priced those lately?
+                        Don't expect the quality to be photorealistic, however. You would need a really really big AI to do that, and have you priced those lately?
 
-                    If you can't think of something, try "Balloon in the shape of X" where X is something you wouldn't find in balloon form.""")
+                        If you can't think of something, try "Balloon in the shape of X" where X is something you wouldn't find in balloon form.""")
 
-            with right_column:
-                st.title("Your Creation Output🙌")
-                st.write("It can take some while....")
+                with right_column:
+                    st.title("Your Creation Output🙌")
+                    st.write("It can take some while....")
 
-                try:
                     if inpu1:
                         progress_text = "Operation in progress. Please wait.."
                         my_bar = st.progress(0, text=progress_text)
@@ -315,8 +315,10 @@ def main():
                         new_image = image.resize((600, 500))
                         st.image(new_image, caption = inpu1)
                         my_bar.empty()
-                except:
-                    st.error("Error, This error can be genrated from server side.// Recommended Action: Rerun the App //")
+
+                st.divider()
+            except:
+                st.error("Error, This error can be genrated from server side.// Recommended Action: Reload the App //")
                 
             st.divider()
 
