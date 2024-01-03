@@ -140,43 +140,47 @@ def main():
             user = st.file_uploader("Upload PDF file", type="pdf")
             docs = []  # Moved this line here
 
-            # Check if a PDF file is uploaded
-            if user is not None:
-                user_question = st.text_input("Ask questions")
-                st.button("Ask BrainBot")
+            try:
+                # Check if a PDF file is uploaded
+                if user is not None:
+                    user_question = st.text_input("Ask questions")
+                    st.button("Ask BrainBot")
 
-                # Extract the text from the PDF
-                pdf_reader = PdfReader(user)
-                text = ""
-                for page in pdf_reader.pages:
-                    text += page.extract_text()
+                    # Extract the text from the PDF
+                    pdf_reader = PdfReader(user)
+                    text = ""
+                    for page in pdf_reader.pages:
+                        text += page.extract_text()
 
-                # Split text into chunks
-                text_splitter = CharacterTextSplitter(
-                    separator="\n",
-                    chunk_size=150,
-                    chunk_overlap=35,
-                    length_function=len
-                )
-                chunks = text_splitter.split_text(text)
-
-                # Get embedding model
-                repo_id = "sentence-transformers/all-MiniLM-L6-v2"
-                hf = HuggingFaceHubEmbeddings(repo_id=repo_id)
-                embeddings = hf
-                knowledge_base = FAISS.from_texts(chunks, embeddings)
-
-                # Create vector database
-                if user_question:
-                    docs = knowledge_base.similarity_search(user_question)
-
-                    llm = HuggingFaceHub(repo_id="google/flan-t5-xxl", model_kwargs={"temperature": 0.5, "max_length": 50}
+                    # Split text into chunks
+                    text_splitter = CharacterTextSplitter(
+                        separator="\n",
+                        chunk_size=150,
+                        chunk_overlap=35,
+                        length_function=len
                     )
+                    chunks = text_splitter.split_text(text)
 
-                    chain = load_qa_chain(llm, chain_type="stuff")
-                    generated_text = chain.run(input_documents=docs, question=user_question)
-                    with st.chat_message("assistant"):
-                        st.write(generated_text)
+                    # Get embedding model
+                    repo_id = "sentence-transformers/all-MiniLM-L6-v2"
+                    hf = HuggingFaceHubEmbeddings(repo_id=repo_id)
+                    embeddings = hf
+                    knowledge_base = FAISS.from_texts(chunks, embeddings)
+
+                    # Create vector database
+                    if user_question:
+                        docs = knowledge_base.similarity_search(user_question)
+
+                        llm = HuggingFaceHub(repo_id="google/flan-t5-xxl", model_kwargs={"temperature": 0.5, "max_length": 50}
+                        )
+
+                        chain = load_qa_chain(llm, chain_type="stuff")
+                        generated_text = chain.run(input_documents=docs, question=user_question)
+                        with st.chat_message("assistant"):
+                            st.write(generated_text)
+            except:
+                st.error("Error, This error can be genrated from server side.// Recommended Action: Reload the App //")
+                st.stop()
 
 
     elif page == "ChatBot":
@@ -210,29 +214,34 @@ def main():
 
             st.markdown(page_bg_img, unsafe_allow_html=True)
 
-            # repo_id = "mistralai/Mistral-7B-v0.1" 
-            repo_id = "openchat/openchat-3.5-1210"
-            st.title("Chat with BrainBot AI")
-            st.markdown(""":red[**The BrainBot Ai is in early stages, can generete short inaccurate responses**]""")
-            question = st.text_input("Write Something Here: ")
-            st.button("Ask BrainBot")
-            if question:
-                if st.button:
-                    template = """Question: {question}
+            try:
+                # repo_id = "mistralai/Mistral-7B-v0.1" 
+                repo_id = "openchat/openchat-3.5-1210"
+                st.title("Chat with BrainBot AI")
+                st.markdown(""":red[**The BrainBot Ai is in early stages, can generete short inaccurate responses**]""")
+                question = st.text_input("Write Something Here: ")
+                st.button("Ask BrainBot")
+                if question:
+                    if st.button:
+                        template = """Question: {question}
 
-                            Answer: Lets think step by step I'm a smart assistant My work is to provide efficient answer My name is BrainBot developed by Mr.Tarun """
+                                Answer: Lets think step by step I'm a smart assistant My work is to provide efficient answer My name is BrainBot developed by Mr.Tarun """
 
-                    prompt = PromptTemplate(template=template, input_variables=["question"])
-                    llm = HuggingFaceHub(
-                        repo_id=repo_id, model_kwargs={"temperature": 0.5, "max_length": 5000}
-                    )
-                    llm_chain = LLMChain(prompt=prompt, llm=llm)
+                        prompt = PromptTemplate(template=template, input_variables=["question"])
+                        llm = HuggingFaceHub(
+                            repo_id=repo_id, model_kwargs={"temperature": 0.5, "max_length": 5000}
+                        )
+                        llm_chain = LLMChain(prompt=prompt, llm=llm)
 
-                    generated_text = llm_chain.run(question)
-                    with st.chat_message("user"):
-                        st.write(generated_text)
-                else:
-                    st.warning("Oops! Something went wrong. Please try again.")
+                        generated_text = llm_chain.run(question)
+                        with st.chat_message("user"):
+                            st.write(generated_text)
+                    else:
+                        st.warning("Oops! Something went wrong. Please try again.")
+
+            except:
+                st.error("Error, This error can be genrated from server side.// Recommended Action: Reload the App //")
+                st.stop()
 
     elif page == "Text-to-Image":
         with st.container():
@@ -288,25 +297,29 @@ def main():
                 st.title("Your Creation Output🙌")
                 st.write("It can take some while....")
 
-                if inpu1:
-                    progress_text = "Operation in progress. Please wait.."
-                    my_bar = st.progress(0, text=progress_text)
+                try:
+                    if inpu1:
+                        progress_text = "Operation in progress. Please wait.."
+                        my_bar = st.progress(0, text=progress_text)
 
-                    for percent_complete in range(100):
-                        time.sleep(0.1)
-                        my_bar.progress(percent_complete + 1, text=progress_text)
-                    time.sleep(1)
-                    # my_bar.empty()
-                    def query(payload):
-                        response = requests.post(API_URL2, headers=headers, json=payload)
-                        return response.content
-                    image_bytes = query({
-                        "inputs": inpu1,
-                    })
-                    image = Image.open(io.BytesIO(image_bytes))
-                    new_image = image.resize((600, 500))
-                    st.image(new_image, caption = inpu1)
-                    my_bar.empty()
+                        for percent_complete in range(100):
+                            time.sleep(0.1)
+                            my_bar.progress(percent_complete + 1, text=progress_text)
+                        time.sleep(1)
+                        # my_bar.empty()
+                        def query(payload):
+                            response = requests.post(API_URL2, headers=headers, json=payload)
+                            return response.content
+                        image_bytes = query({
+                            "inputs": inpu1,
+                        })
+                        image = Image.open(io.BytesIO(image_bytes))
+                        new_image = image.resize((600, 500))
+                        st.image(new_image, caption = inpu1)
+                        my_bar.empty()
+                except:
+                    st.error("Error, This error can be genrated from server side.// Recommended Action: Reload the App //")
+                    st.stop()
                 
             st.divider()
 
