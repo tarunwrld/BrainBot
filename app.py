@@ -38,9 +38,6 @@ st.set_page_config(
 def main():
     IP = ip.get()
     print(IP)
-    
-    print("Uer Computer Name is:" + hostname)
-    print("User Computer IP Address is:" + IPAddr)
 
     # Set up Streamlit page
     with st.sidebar:
