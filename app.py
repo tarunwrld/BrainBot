@@ -54,9 +54,7 @@ def main():
 
     if page == "Home":
         with st.container(): 
-            IP = ip.get()
-            print(IP)
-
+            ip.get()
             page_bg_img = '''
                 <style>
                     [data-testid = "stAppViewContainer"] {
