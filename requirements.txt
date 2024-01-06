@@ -5,3 +5,4 @@ faiss-cpu
 pypdf
 PyPDF2
 textract
+public-ip
