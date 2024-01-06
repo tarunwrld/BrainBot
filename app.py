@@ -36,9 +36,6 @@ st.set_page_config(
     )
 
 def main():
-    IP = ip.get()
-    print(IP)
-
     # Set up Streamlit page
     with st.sidebar:
         st.sidebar.title("Navigation")
@@ -56,7 +53,10 @@ def main():
     user = None  # Define the user variable outside the if block
 
     if page == "Home":
-        with st.container():    
+        with st.container(): 
+            IP = ip.get()
+            print(IP)
+
             page_bg_img = '''
                 <style>
                     [data-testid = "stAppViewContainer"] {
