@@ -12,7 +12,7 @@ from PIL import Image
 import time
 import requests
 import streamlit as st
-import socket
+import public_ip as ip
 
 os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACETOKEN1"]
 API_TOKEN = os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACETOKEN2"]
@@ -36,8 +36,8 @@ st.set_page_config(
     )
 
 def main():
-    hostname = socket.gethostname()
-    IPAddr = socket.gethostbyname(hostname)
+    IP = ip.get()
+    print(IP)
     
     print("Uer Computer Name is:" + hostname)
     print("User Computer IP Address is:" + IPAddr)
