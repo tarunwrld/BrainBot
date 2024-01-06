@@ -34,7 +34,22 @@ st.set_page_config(
         'About': "# Under Construction"
     }
     )
+def get_client_ip():
+    # Make a request to a public API
+    response = requests.get('https://api.ipify.org')
+    
+    # Get the IP address from the response headers
+    ip_address = response.headers.get('X-Real-IP', response.headers.get('X-Forwarded-For'))
+    
+    # If the IP address is not found, return None
+    if not ip_address:
+        return None
+    
+    # Return the IP address as a string
+    return ip_address.strip()
 
+# Test the function
+print(get_client_ip())
 def main():
     # Set up Streamlit page
     with st.sidebar:
@@ -54,7 +69,6 @@ def main():
 
     if page == "Home":
         with st.container(): 
-            ip.get()
             page_bg_img = '''
                 <style>
                     [data-testid = "stAppViewContainer"] {
