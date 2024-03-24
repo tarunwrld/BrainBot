@@ -15,16 +15,16 @@ import streamlit as st
 from dataclasses import dataclass, asdict
 from ctransformers import AutoModelForCausalLM, AutoConfig
 
-# os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACETOKEN1"]
-# API_TOKEN = os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACETOKEN2"]
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACETOKEN1"]
+API_TOKEN = os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACETOKEN2"]
 
-# API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-v0.1"
-# API_URL2 = "https://api-inference.huggingface.co/models/segmind/SSD-1B"
-# headers = {"Authorization": f"Bearer {API_TOKEN}"}
+API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-v0.1"
+API_URL2 = "https://api-inference.huggingface.co/models/segmind/SSD-1B"
+headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
-# def query(payload):
-#     response = requests.post(API_URL, headers=headers, json=payload)
-#     return response.json()
+def query(payload):
+    response = requests.post(API_URL, headers=headers, json=payload)
+    return response.json()
 
 
 st.set_page_config(
