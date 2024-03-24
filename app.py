@@ -221,7 +221,6 @@ def main():
                                                         model_file = "falcon-7b-Q4_0-GGUF.gguf",
                                                         model_type ="falcon",
                                                         temperature=0.3,
-                                                        local_files_only=True
                                                         )
                 return llm(question, stream=True)
 
