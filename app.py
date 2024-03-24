@@ -217,7 +217,8 @@ def main():
             st.divider()
 
             def mod(question):         
-                llm = AutoModelForCausalLM.from_pretrained(os.path.abspath("C:\\Users\\hp\\TarunCode\\Python\\streamlit\\gpt4all-falcon-newbpe-q4_0.gguf"),
+                llm = AutoModelForCausalLM.from_pretrained("NikolayKozloff/falcon-7b-GGUF",
+                                                        model_file = "falcon-7b-Q4_0-GGUF.gguf",
                                                         model_type ="falcon",
                                                         temperature=0.3,
                                                         local_files_only=True
