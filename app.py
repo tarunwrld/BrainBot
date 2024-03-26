@@ -3,8 +3,6 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import HuggingFaceHubEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
-from langchain.chains import LLMChain
-from langchain.prompts import PromptTemplate
 from langchain.llms import HuggingFaceHub
 import os
 import io
@@ -12,8 +10,7 @@ from PIL import Image
 import time
 import requests
 import streamlit as st
-from dataclasses import dataclass, asdict
-from ctransformers import AutoModelForCausalLM, AutoConfig
+import socket
 
 os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACETOKEN1"]
 API_TOKEN = os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACETOKEN2"]
@@ -214,15 +211,21 @@ def main():
 
             st.markdown(""":red[**Your privacy is of paramount importance to us ensuring that we do not collect any user data.**]""")
 
+            st.markdown(""":red[**BrainBot is in early faces so server might take some seconds to respond Tip:- Have a fast internet connection**]""")
+
             st.divider()
 
-            def mod(question):         
-                llm = AutoModelForCausalLM.from_pretrained("NikolayKozloff/falcon-7b-GGUF",
-                                                        model_file = "falcon-7b-Q4_0-GGUF.gguf",
-                                                        model_type ="falcon",
-                                                        temperature=0.3,
-                                                        )
-                return llm(question, stream=True)
+            def mod(question):
+                client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                host = 'india-artistic.gl.at.ply.gg'
+                port = 10010
+                client_socket.connect((host, port))
+            
+                while True:
+                    client_socket.sendall(question.encode('utf-8'))
+                    data = client_socket.recv(1024)
+                    response = data.decode('utf-8')
+                    return response
 
             def lol(question):
                 d = mod(question)
@@ -233,14 +236,17 @@ def main():
             question = st.chat_input("Write Something Here: ")
 
             if question:
+                ans = lol(question)
                 with st.status("In Progress..."):
                     st.write("Loading Model")
-                    time.sleep(1)
+                    time.sleep(5)
                     st.write("Searching for data...")
-                    time.sleep(1)
+                    time.sleep(5)
                 st.write("Assistant: ")
+                with st.chat_message("user"):
+                    st.write(question)
                 with st.chat_message("assistant"):
-                    st.write_stream(lol(question))
+                    st.write_stream(ans)
             else:
                 st.write("Try Asking Who is Elbert Einstien, Where is Taj Mahal Located.. ")
 
