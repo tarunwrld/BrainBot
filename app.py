@@ -46,7 +46,7 @@ def main():
                 """
         st.markdown(hide_st_style, unsafe_allow_html=True)
         
-        page = st.sidebar.radio("", ("Home", "Pdf Chat", "ChatBot","Text-to-Image","Privacy Policy", "Text-to-Voice", "My Projects"))
+        page = st.sidebar.radio("options",["Home", "Pdf Chat", "ChatBot","Text-to-Image","Privacy Policy", "Text-to-Voice", "My Projects"], label_visibility="collapsed")
 
     user = None  # Define the user variable outside the if block
 
