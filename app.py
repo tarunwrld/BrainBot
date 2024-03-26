@@ -215,10 +215,17 @@ def main():
 
             st.divider()
 
+            greet_text = """Hello!! How can I assist you?"""
+
+            def greet():
+                for word in greet_text.split():
+                    yield word + " "
+                    time.sleep(0.1)
+
             def mod(question):
                 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                host = 'india-artistic.gl.at.ply.gg'
-                port = 10010
+                host = '127.0.0.1'
+                port = 8080
                 client_socket.connect((host, port))
             
                 while True:
@@ -229,24 +236,36 @@ def main():
 
             def lol(question):
                 d = mod(question)
-                for word in d:
-                    yield word
-                    time.sleep(0.02)
+                for word in d.split():
+                    yield word + " "
+                    time.sleep(0.01)
                     
             question = st.chat_input("Write Something Here: ")
 
-            if question:
-                ans = lol(question)
-                with st.status("In Progress..."):
-                    st.write("Loading Model")
-                    time.sleep(5)
-                    st.write("Searching for data...")
-                    time.sleep(5)
-                st.write("Assistant: ")
-                with st.chat_message("user"):
-                    st.write(question)
-                with st.chat_message("assistant"):
-                    st.write_stream(ans)
+            with st.status("In Progress...It might take some seconds"):
+                        st.write("Loading Model")
+                        time.sleep(1)
+                        st.write("Searching for data...")
+                        time.sleep(3)
+            if question: 
+                if question.lower() in ["hi","hy", "yo", "hello", "how are you", "hola", "heya", "hey"]:
+                    with st.status("In Progress..."):
+                        st.write("Loading Model")
+                        time.sleep(1)
+                        st.write("Searching for data...")
+                        time.sleep(2)   
+                    with st.chat_message("user"):
+                        st.write(question)
+                    with st.chat_message("assistant"):
+                        st.write_stream(greet)
+                
+                else:
+                    ans = mod(question)
+                    with st.chat_message("user"):
+                        st.write(question)
+                    with st.chat_message("assistant"):
+                        st.write(ans)
+                
             else:
                 st.write("Try Asking Who is Elbert Einstien, Where is Taj Mahal Located.. ")
 
