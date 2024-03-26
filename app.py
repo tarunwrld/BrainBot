@@ -231,7 +231,7 @@ def main():
                 d = mod(question)
                 for word in d:
                     yield word
-                    time.sleep(0.1)
+                    time.sleep(0.02)
                     
             question = st.chat_input("Write Something Here: ")
 
